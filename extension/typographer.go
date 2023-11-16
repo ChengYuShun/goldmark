@@ -44,6 +44,8 @@ const (
 	LeftDoubleQuote
 	// RightDoubleQuote is " .
 	RightDoubleQuote
+	// Hyphen is - .
+	Hyphen
 	// EnDash is -- .
 	EnDash
 	// EmDash is --- .
@@ -72,6 +74,7 @@ func newDefaultSubstitutions() [][]byte {
 	replacements[RightSingleQuote] = []byte("&rsquo;")
 	replacements[LeftDoubleQuote] = []byte("&ldquo;")
 	replacements[RightDoubleQuote] = []byte("&rdquo;")
+	replacements[Hyphen] = []bytes("-")
 	replacements[EnDash] = []byte("&ndash;")
 	replacements[EmDash] = []byte("&mdash;")
 	replacements[Ellipsis] = []byte("&hellip;")
@@ -207,6 +210,12 @@ func (s *typographerParser) Parse(parent gast.Node, block text.Reader, pc parser
 			block.Advance(2)
 			return node
 		}
+	}
+	if c == '-' && s.Substitutions[Hyphen] != nil {
+		node := gast.NewString(s.Substitutions[Hyphen])
+		node.SetCode(true)
+		block.Advance(1)
+		return node
 	}
 	if c == '\'' || c == '"' {
 		before := block.PrecendingCharacter()
