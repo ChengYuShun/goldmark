@@ -74,7 +74,7 @@ func newDefaultSubstitutions() [][]byte {
 	replacements[RightSingleQuote] = []byte("&rsquo;")
 	replacements[LeftDoubleQuote] = []byte("&ldquo;")
 	replacements[RightDoubleQuote] = []byte("&rdquo;")
-	replacements[Hyphen] = []bytes("-")
+	replacements[Hyphen] = []byte("-")
 	replacements[EnDash] = []byte("&ndash;")
 	replacements[EmDash] = []byte("&mdash;")
 	replacements[Ellipsis] = []byte("&hellip;")
